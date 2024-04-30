@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Hello world</title>
+    <!-- Add this to your HTML file -->
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js" integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO" crossorigin="anonymous"></script>
+    
+
+
+</head>
+<body>
+
+    <p>Hello World</p>
+    
+        <label for="msg">Message:</label>
+        <input type="text" id="msg" />
+        <button type="submit" onclick="message()">Send</button>
+    </div>
+   
+
+
+    <script>
+       const socket = io("http://localhost:3030")
+       
+       const channel = io('http://localhost:3030/channel1')
+       const channel2 = io('http://localhost:3030/channel2')
+
+      
+
+       function message(){
+        msg = document.getElementById('msg').value
+        
+        socket.emit('message',  msg)
+       }
+       
+       socket.on('serverToClient', (data)=>{
+        document.body.innerHTML=''
+        document.write(data)
+       })
+
+       channel.on('channel', (msg)=>{
+        document.body.innerHTML=''
+        document.write(msg)
+       })
+
+       channel.on('channe2', (msg)=>{
+        document.body.innerHTML=''
+        console.log(msg)
+       })
+      
+
+
+
+    </script>
+</body>
+</html>
